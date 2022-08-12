@@ -118,6 +118,8 @@ button{
 }
 
 .drawer{
+  display: flex;
+  flex-direction: column;
   position: absolute;
   width: 420px;
   height: 100%;
@@ -132,9 +134,12 @@ button{
 
 }
 
-.cartTotalBlock{
-  margin-top: 400px;
+.items{
+  flex: 1;
+  overflow: auto;
+  margin-bottom: 40px;
 }
+
 
 .cartTotalBlock  li{
   display: flex;
@@ -240,3 +245,4 @@ h2{
   overflow: auto;
   margin-bottom: 40px;
 }
+

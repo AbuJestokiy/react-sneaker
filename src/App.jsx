@@ -1,7 +1,7 @@
 import './index.css'
-import Card from './Card'
-import Header from './Header'
-import Drawer from './Drawer'
+import Card from './components/Card/Index'
+import Header from './components/Header'
+import Drawer from './components/Drawer'
 
 const arr = [
   { name:'Мужские Кроссовки Nike Blazer Mid Suede', price: 12999, imageUrl:'/img/1.png'},

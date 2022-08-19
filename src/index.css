@@ -43,20 +43,14 @@ header .headerLeft h3 , p{
 header .headerLeft img{
   margin-right: 15px;
 }
+header img{
+  margin-right: 15px;
+}
 
 .plus{
   cursor: pointer;
 }
 
-button{
-  background: #FFFFFF;
-  border: 1px solid #F2F2F2;
-  box-sizing: border-box;
-  border-radius: 8px;
-  height: 32px;
-  width: 32px;
-  cursor: pointer;
-}
 
 .search-block{
   border: 1px solid #f3f3f3;

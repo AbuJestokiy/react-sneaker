@@ -1,0 +1,36 @@
+[
+    { 
+    title:'Мужские Кроссовки Nike Blazer Mid Suede',
+     price: 12999,
+      imageUrl:'/img/1.png'
+    },
+    {
+    title:'Мужские Кроссовки Nike Air Max 270',
+     price: 15600, 
+     imageUrl:'/img/4.png'
+    },
+
+    {
+    title:'Кроссовки Puma X Aka Boku Future Rider', 
+    price: 8499, 
+    imageUrl:'/img/3.png'
+},
+
+    {
+    title:'Мужские Кроссовки Nike Blazer Mid Suede', 
+    price: 8999, 
+    imageUrl:'/img/2.png'
+},
+
+    {
+    title:'Мужские Кроссовки Nike Blazer Mid Suede', 
+    price: 8999, 
+    imageUrl:'/img/2.png'
+},
+{
+    title:'Мужские Кроссовки Nike Blazer Mid Suede', 
+    price: 8999, 
+    imageUrl:'/img/2.png'
+}
+
+]

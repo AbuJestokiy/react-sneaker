@@ -1,20 +1,24 @@
+import React from 'react'
 import './index.css'
 import Card from './components/Card/Index'
 import Header from './components/Header'
 import Drawer from './components/Drawer'
+import { useState } from 'react'
 
 const arr = [
-  { name:'Мужские Кроссовки Nike Blazer Mid Suede', price: 12999, imageUrl:'/img/1.png'},
-  {name:'Мужские Кроссовки Nike Air Max 270', price: 15600, imageUrl:'/img/4.png'},
-  {name:'Кроссовки Puma X Aka Boku Future Rider', price: 8499, imageUrl:'/img/3.png'},
-  {name:'Мужские Кроссовки Nike Blazer Mid Suede', price: 8999, imageUrl:'/img/2.png'}
+ 
 ]
 
+
 function App() {
+  const [cartOpened,setCartOpened] = React.useState(false)
+
+
   return (
     <div className="Wrapper clear">
-      <Drawer/>
-        <Header />
+      
+      { cartOpened && <Drawer  onClose={() => setCartOpened(false)}/>}
+        <Header onClickCart={() => setCartOpened(true)} />
         <div className="content p-40">
           <div className='d-flex align-center justify-between mb-40'>
             <h1>Все кроссовки</h1>

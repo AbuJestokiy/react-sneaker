@@ -5,128 +5,28 @@ import Header from './components/Header'
 import Drawer from './components/Drawer'
 import { useState } from 'react'
 
-const arr = [
-  { 
-    "title":"Мужские Кроссовки Nike Blazer Mid Suede",
-    "price": "12999",
-    "imageUrl":"/img/1.png"
-    },
-    {
-      "title":"Мужские Кроссовки Nike Air Max 270",
-      "price": "15600", 
-      "imageUrl":"/img/4.png"
-      },
-      {
-        "title":"Кроссовки Puma X Aka Boku Future Rider", 
-        "price": "8499", 
-        "imageUrl":"/img/3.png",
-    },
-        {
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-        "price": "8999", 
-        "imageUrl":"/img/2.png"
-    },
-        {
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-        "price": "13699", 
-        "imageUrl":"/img/5.png"
-    },
-    {
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-        "price": "7599", 
-        "imageUrl":"/img/6.png"
-    },
-    { 
-      "title":"Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": "12999",
-      "imageUrl":"/img/7.png"
-      },
-      {
-        "title":"Мужские Кроссовки Nike Air Max 270",
-        "price": "15600", 
-        "imageUrl":"/img/8.png"
-        },
-        {
-          "title":"Кроссовки Puma X Aka Boku Future Rider", 
-          "price": "8499", 
-          "imageUrl":"/img/9.png",
-      },
-          {
-          "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-          "price": "8999", 
-          "imageUrl":"/img/10.png"
-      },
-]
-
 
 function App() {
-  const[items, setItems] = React.useState([
-    { 
-    "title":"Мужские Кроссовки Nike Blazer Mid Suede",
-    "price": "12999",
-    "imageUrl":"/img/1.png"
-    },
-    {
-      "title":"Мужские Кроссовки Nike Air Max 270",
-      "price": "15600", 
-      "imageUrl":"/img/4.png"
-      },
-      {
-        "title":"Кроссовки Puma X Aka Boku Future Rider", 
-        "price": "8499", 
-        "imageUrl":"/img/3.png",
-    },
-        {
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-        "price": "8999", 
-        "imageUrl":"/img/2.png"
-    },
-        {
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-        "price": "13699", 
-        "imageUrl":"/img/5.png"
-    },
-    {
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-        "price": "7599", 
-        "imageUrl":"/img/6.png"
-    },
-    { 
-      "title":"Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": "12999",
-      "imageUrl":"/img/7.png"
-      },
-      {
-        "title":"Мужские Кроссовки Nike Air Max 270",
-        "price": "15600", 
-        "imageUrl":"/img/8.png"
-        },
-        {
-          "title":"Кроссовки Puma X Aka Boku Future Rider", 
-          "price": "8499", 
-          "imageUrl":"/img/9.png",
-      },
-          {
-          "title":"Мужские Кроссовки Nike Blazer Mid Suede", 
-          "price": "8999", 
-          "imageUrl":"/img/10.png"
-      },{ 
-        "title":"Мужские Кроссовки Nike Blazer Mid Suede",
-        "price": "12999",
-        "imageUrl":"/img/1.png"
-        },
-        {
-          "title":"Мужские Кроссовки Nike Air Max 270",
-          "price": "15600", 
-          "imageUrl":"/img/4.png"
-          }])
+  const[items, setItems] = React.useState([])
+  const[cartItems, setCartItems] = React.useState([])
+
   const [cartOpened,setCartOpened] = React.useState(false)
 
+  React.useEffect(() => {
+     
+    fetch('https://62ff86d034344b6431fb78f6.mockapi.io/items')
+    .then(data => data.json())
+    .then(result => setItems(result))
+  },[])
+
+const onAddToCart = (obj) => {
+  setCartItems(prev => [...prev, obj])
+}
 
   return (
     <div className="Wrapper clear">
       
-      { cartOpened && <Drawer  onClose={() => setCartOpened(false)}/>}
+      { cartOpened && <Drawer items={cartItems}  onClose={() => setCartOpened(false)}/>}
         <Header onClickCart={() => setCartOpened(true)} />
         <div className="content p-40">
           <div className='d-flex align-center justify-between mb-40'>
@@ -138,14 +38,16 @@ function App() {
           </div>
 
           <div className='d-flex flex-wrap '>
-           {items.map((obj) => (
+           {items.map((item) => 
             <Card
-            title={obj.name}
-            price={obj.price}
-            imageUrl={obj.imageUrl}
-            onClick={() => console.log(obj)}
+            title={item.title}
+            price={item.price}
+            imageUrl={item.imageUrl}
+            onFavourite={() => console.log('Добавили в закладки')}
+            onPlus={(obj) => onAddToCart(item)}
+
             />
-           ))}
+           )}
           </div>
         </div>
     </div>

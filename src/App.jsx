@@ -9,9 +9,10 @@ import { useState } from 'react'
 function App() {
   const[items, setItems] = React.useState([])
   const[cartItems, setCartItems] = React.useState([])
-
+  const[searchValue, setSearchValue] = React.useState('')
   const [cartOpened,setCartOpened] = React.useState(false)
 
+  console.log(searchValue)
   React.useEffect(() => {
      
     fetch('https://62ff86d034344b6431fb78f6.mockapi.io/items')
@@ -23,6 +24,10 @@ const onAddToCart = (obj) => {
   setCartItems(prev => [...prev, obj])
 }
 
+const onChangeSearchInput = (event) => {
+  setSearchValue(event.target.value)
+}
+
   return (
     <div className="Wrapper clear">
       
@@ -30,16 +35,18 @@ const onAddToCart = (obj) => {
         <Header onClickCart={() => setCartOpened(true)} />
         <div className="content p-40">
           <div className='d-flex align-center justify-between mb-40'>
-            <h1>Все кроссовки</h1>
+            <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все Кроссовки'}</h1>
             <div className='search-block'>
               <img src="/img/search.png" alt="Search" />
-              <input placeholder='Поиск...' />
+              { searchValue && <img onClick={() => setSearchValue('')} className='clear removeBtn' src="/img/x.png" alt="Close" />}
+              <input maxLength={40} value={searchValue} onChange={onChangeSearchInput} placeholder='Поиск...' />
             </div>
           </div>
 
           <div className='d-flex flex-wrap '>
-           {items.map((item) => 
+           {items.map((item, index) => 
             <Card
+            key={index}
             title={item.title}
             price={item.price}
             imageUrl={item.imageUrl}

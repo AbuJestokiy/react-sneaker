@@ -4,25 +4,24 @@ import Card from './components/Card/Index'
 import Header from './components/Header'
 import Drawer from './components/Drawer'
 import { useState } from 'react'
+import axios from 'axios'
 
 
-function App() {
+ function App() {
   const[items, setItems] = React.useState([])
   const[cartItems, setCartItems] = React.useState([])
   const[searchValue, setSearchValue] = React.useState('')
   const [cartOpened,setCartOpened] = React.useState(false)
 
-  console.log(searchValue)
   React.useEffect(() => {
-     
-    fetch('https://62ff86d034344b6431fb78f6.mockapi.io/items')
-    .then(data => data.json())
-    .then(result => setItems(result))
-  },[])
+    axios.get('https://62ff86d034344b6431fb78f6.mockapi.io/items').then((res) => {
+      setItems(res.data)
+    })
+  })
 
 const onAddToCart = (obj) => {
-  setCartItems(prev => [...prev, obj])
-}
+    axios.post('https://62ff86d034344b6431fb78f6.mockapi.io/cart', obj)
+    setCartItems(prev => [...prev, obj])
 
 const onChangeSearchInput = (event) => {
   setSearchValue(event.target.value)
@@ -44,7 +43,8 @@ const onChangeSearchInput = (event) => {
           </div>
 
           <div className='d-flex flex-wrap '>
-           {items.map((item, index) => 
+           {items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+           .map((item, index) => 
             <Card
             key={index}
             title={item.title}
@@ -60,5 +60,5 @@ const onChangeSearchInput = (event) => {
     </div>
   );
 }
-
-export default App;
+}
+export default App
